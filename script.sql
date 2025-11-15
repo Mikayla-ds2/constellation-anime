@@ -34,5 +34,4 @@ order by rank asc;
 select * from anime 
 where rating like '%violence%'
 
-select name, rank, rating from anime
-where genres like 'Hentai'
+select DISTINCT(producers) from anime
