@@ -7,14 +7,14 @@ create table if NOT EXISTS anime (
     name VARCHAR(500),
     genres VARCHAR(5000),
     type VARCHAR(50),
-    episodes int,
+    episodes FLOAT,
     status VARCHAR(50),
     airedFrom DATE,
     airedTo DATE,
-    duration DECIMAL(4, 1),
-    score DECIMAL(10, 2),
-    ratingUsers int,
-    rank int,
+    duration FLOAT,
+    score FLOAT,
+    ratingUsers FLOAT,
+    rank FLOAT,
     rating VARCHAR(500),
     studios VARCHAR(500),
     producers VARCHAR(5000)
@@ -26,3 +26,13 @@ DELIMITER ','
 csv header;
 
 select * from anime
+
+select name, episodes, rank from anime
+where rank < 15
+order by rank asc;
+
+select * from anime 
+where rating like '%violence%'
+
+select name, rank, rating from anime
+where genres like 'Hentai'
