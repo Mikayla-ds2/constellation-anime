@@ -3,25 +3,25 @@ drop table if EXISTS anime;
 
 create table if NOT EXISTS anime (
     animeID int,
-    id int PRIMARY key,
+    id int,
     name VARCHAR(500),
-    genres VARCHAR(5000),
     type VARCHAR(50),
     episodes FLOAT,
+    episodes_category VARCHAR(500),
+    duration FLOAT,
     status VARCHAR(50),
     airedFrom DATE,
     airedTo DATE,
-    duration FLOAT,
+    genre VARCHAR(50),
+    producer VARCHAR(50),
+    studio VARCHAR(50),
     score FLOAT,
     ratingUsers FLOAT,
     rank FLOAT,
-    rating VARCHAR(500),
-    studios VARCHAR(500),
-    producers VARCHAR(5000),
-    episodes_category VARCHAR(500)
+    rating VARCHAR(500)
 )
 
-/copy anime(animeID, id, name, genres, type, episodes, status, airedFrom, airedTo, duration, score, ratingUsers, rank, rating, studios, producers, episodes_category)
+/copy anime(animeID, id, name, type, episodes, episodes_category, duration, status, airedFrom, airedTo, genre, producer, studio, score, ratingUsers, rank, rating)
 from '/tmp/popularanime.csv'
 DELIMITER ','
 csv header;
@@ -64,3 +64,20 @@ select count(episodes) as episodeCount, type from anime
 where episodes > 0 and episodes < 50
 group by type
 order by episodeCount desc;
+
+select DISTINCT(name), genre, rank from anime
+where genre = 'Slice of Life'
+order by rank asc;
+
+select DISTINCT(genre) from anime
+
+select DISTINCT(rank), name from anime
+order by rank asc;
+
+select DISTINCT(rank) from anime
+order by rank asc;
+
+select genre, avg(rank) as averageRank from anime
+group by genre
+order by averageRank asc;
+
