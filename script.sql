@@ -28,7 +28,7 @@ csv header;
 
 select * from anime
 
-select name, episodes, rank from anime
+select DISTINCT(name), episodes, rank from anime
 where rank < 15
 order by rank asc;
 
@@ -39,7 +39,7 @@ select DISTINCT(type), count(animeID) as type_count from anime
 group by type
 order by type_count desc;
 
-select animeID, id, name, type, episodes, status from anime
+select DISTINCT(id), name, type, episodes, status from anime
 where not type = 'TV' and name not like '%Season%'
 
 select animeID, name, episodes, episodes_category from anime
@@ -81,3 +81,41 @@ select genre, avg(rank) as averageRank from anime
 group by genre
 order by averageRank asc;
 
+select genre, avg(score) as averageScore from anime
+group by genre
+order by averageScore desc;
+
+select producer, avg(score) as averageScore from anime
+group by producer
+order by averageScore desc;
+
+select studio, avg(ratingUsers) as averageRaters from anime
+group by studio
+order by averageRaters desc;
+
+select DISTINCT(producer) from anime
+
+select DISTINCT(name), producer, rank from anime
+order by rank asc;
+
+select DISTINCT(id), name, score from anime
+where producer = 'Miracle Robo'
+
+select DISTINCT(id), name, studio, rank from anime
+where studio = 'Wit Studio'
+order by rank asc;
+
+select DISTINCT(id), name, status, rank from anime
+where status = 'Currently Airing'
+order by rank asc;
+
+select DISTINCT(id), name, type, episodes, rank from anime
+where name not like '%Part%' and name not like '%Season%'
+order by rank asc;
+
+select DISTINCT(id), name, rank from anime
+where name = 'Attack on Titan'
+
+select DISTINCT(id), name, rank, score, ratingUsers from anime
+where name like '%Part%' or name like '%Season%'
+order by score desc;
