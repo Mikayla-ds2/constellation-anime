@@ -119,3 +119,7 @@ where name = 'Attack on Titan'
 select DISTINCT(id), name, rank, score, ratingUsers from anime
 where name like '%Part%' or name like '%Season%'
 order by score desc;
+
+select DISTINCT(name), ratingUsers from anime
+where name not like '%Part%' and name not like '%Season%'
+order by ratingUsers desc; 
